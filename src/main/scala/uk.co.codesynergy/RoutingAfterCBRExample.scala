@@ -12,6 +12,14 @@ import org.apache.camel.scala.dsl.builder.{ScalaRouteBuilder, RouteBuilderSuppor
  * Created by clelio on 22/04/15.
  */
 object RoutingAfterCBRExample extends App with RouteBuilderSupport {
+
+  private def fileEndsWith(ex: Exchange, fileExt: String): Boolean = {
+    ex.getIn.getHeader("CamelFileName") match {
+      case x: String => return x.endsWith(fileExt)
+      case _ => false
+    }
+  }
+
   val context: CamelContext = new DefaultCamelContext
   val connectionFactory: ConnectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616")
   context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory))
@@ -35,13 +43,4 @@ object RoutingAfterCBRExample extends App with RouteBuilderSupport {
   context.addRoutes(routeBuilder)
   context.start
   while (true) {}
-
-  def fileEndsWith(ex: Exchange, fileExt: String): Boolean = {
-    ex.getIn.getHeader("CamelFileName") match {
-      case x: String => return x.endsWith(fileExt)
-      case _ => false
-    }
-  }
-
-
 }
