@@ -1,12 +1,12 @@
-package uk.co.codesynergy
+package uk.co.codesynergy.solver
 
 import javax.jms.ConnectionFactory
 
 import org.apache.activemq.ActiveMQConnectionFactory
-import org.apache.camel.{Exchange, CamelContext}
 import org.apache.camel.component.jms.JmsComponent
 import org.apache.camel.impl.DefaultCamelContext
-import org.apache.camel.scala.dsl.builder.{ScalaRouteBuilder, RouteBuilderSupport}
+import org.apache.camel.scala.dsl.builder.{RouteBuilderSupport, ScalaRouteBuilder}
+import org.apache.camel.{CamelContext, Exchange}
 
 /**
  * Created by clelio on 22/04/15.

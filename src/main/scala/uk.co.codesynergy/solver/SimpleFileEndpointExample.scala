@@ -1,8 +1,8 @@
-package uk.co.codesynergy
+package uk.co.codesynergy.solver
 
 import org.apache.camel.CamelContext
 import org.apache.camel.impl.DefaultCamelContext
-import org.apache.camel.scala.dsl.builder.{ScalaRouteBuilder, RouteBuilder}
+import org.apache.camel.scala.dsl.builder.ScalaRouteBuilder
 
 /**
  * Example taken from http://www.hascode.com/2013/02/using-apache-camel-with-scala-and-the-camel-scala-dsl/
