@@ -3,11 +3,8 @@ package uk.co.codesynergy.solver.service
 import java.lang.String._
 
 import com.aimia.solver.client.model._
-import gurobi.GRB.StringAttr._
+import gurobi.GRB.StringAttr
 import gurobi._
-import Variable.Type._
-import Objective.Sense._
-import Constraint.Sense._
 
 import scala.collection.mutable
 
@@ -23,7 +20,7 @@ object GurobiModelConverter extends ModelConverter[Model, GRBModel] {
 
     // Model
     grbModel = new GRBModel(GRB_ENV)
-    grbModel.set(ModelName, model.getName)
+    grbModel.set(StringAttr.ModelName, model.getName)
 
     // Decision variables
     val mutableMap: mutable.HashMap[Variable, GRBVar] = new mutable.HashMap[Variable, GRBVar]
@@ -138,13 +135,13 @@ object GurobiModelConverter extends ModelConverter[Model, GRBModel] {
 
   private def convertVarType(variableType: Variable.Type): Char = {
     variableType match {
-      case BINARY =>
+      case Variable.Type.BINARY =>
         return GRB.BINARY
-      case INTEGER =>
+      case Variable.Type.INTEGER =>
         return GRB.INTEGER
-      case SEMI_INTEGER =>
+      case Variable.Type.SEMI_INTEGER =>
         return GRB.SEMIINT
-      case SEMI_CONTINUOUS =>
+      case Variable.Type.SEMI_CONTINUOUS =>
         return GRB.SEMICONT
       case _ =>
         return GRB.CONTINUOUS
@@ -153,9 +150,9 @@ object GurobiModelConverter extends ModelConverter[Model, GRBModel] {
 
   private def convertConstrSense(constraintSense: Constraint.Sense): Char = {
     constraintSense match {
-      case GREATER_EQUAL =>
+      case Constraint.Sense.GREATER_EQUAL =>
         return GRB.GREATER_EQUAL
-      case LESS_EQUAL =>
+      case Constraint.Sense.LESS_EQUAL =>
         return GRB.LESS_EQUAL
       case _ =>
         return GRB.EQUAL
@@ -164,7 +161,7 @@ object GurobiModelConverter extends ModelConverter[Model, GRBModel] {
 
   private def convertObjectiveSense(objectiveSense: Objective.Sense): Int = {
     objectiveSense match {
-      case MINIMIZE =>
+      case Objective.Sense.MINIMIZE =>
         return GRB.MINIMIZE
       case _ =>
         return GRB.MAXIMIZE
