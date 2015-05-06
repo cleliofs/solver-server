@@ -15,6 +15,7 @@ libraryDependencies ++= Seq(
   "javax.mail" % "mail" % "1.4.7",
   "com.icegreen" % "greenmail" % "1.4.0",
   "org.apache.camel" % "camel-mail" % "2.15.1",
-  "org.apache.camel" % "camel-velocity" % "2.15.1"
+  "org.apache.camel" % "camel-velocity" % "2.15.1",
+  "com.typesafe.akka" % "akka-camel_2.11" % "2.3.10"
 )
     
